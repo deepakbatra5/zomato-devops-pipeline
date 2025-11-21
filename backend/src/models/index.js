@@ -1,0 +1,2 @@
+const sequelize=require('../config/db');
+module.exports={sequelize,User:require('./user'),Restaurant:require('./restaurant'),MenuItem:require('./menuItem'),Order:require('./order'),OrderItem:require('./orderItem')};

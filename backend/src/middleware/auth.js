@@ -1,0 +1,2 @@
+const jwt=require('jsonwebtoken');const {User}=require('../models');const JWT_SECRET=process.env.JWT_SECRET||'dev_secret';
+module.exports=async (req,res,next)=>{const h=req.headers.authorization;if(!h||!h.startsWith('Bearer '))return res.status(401).json({error:'Unauthorized'});try{const token=h.split(' ')[1];const p=jwt.verify(token,JWT_SECRET);req.user=await User.findByPk(p.id);if(!req.user)return res.status(401).json({error:'Invalid token'});next();}catch(e){return res.status(401).json({error:'Invalid token'})}};
